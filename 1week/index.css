@@ -1,0 +1,87 @@
+* {
+    /* 모든 HTML 태그 */
+    
+}
+
+body, html {
+    width: 100%; /* 너비, 디바이스의 100%까지 늘린다 */
+    height: 100%;
+    font-family: 'Cute Font', cursive;
+    font-family: 'Kirang Haerang', cursive;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 600;
+    /* font-weight: 100,200,300,400,500,600,700, normal, bold */
+}
+.test1 {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(250, 250, 250); 
+    /* 색상코드표 RGB, #99999 */
+    display: flex; 
+    /* 정렬시스템을 flex로 지정 */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    /* css3부터 flex시스템을 사용하여 가운데로 박스 수월하게 보여지게 가능 flex-start, flex-end, center */
+}
+.test2 {
+    /* px, pt, em, rem */
+    width: 480px;
+    height: 320px;
+    background-color: #ffffff;
+    /* #9FC93C //#ffffff */
+    padding: 20px 15px; 
+    /* padding, top, right, bottom, left */
+    /* padding-top: 20px */
+    /* padding-right: 15px */
+    /* padding-bottom: 20px */
+    /* padding-left: 15px */
+    background-image: url(./aaa.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+}
+h1{
+    font-size: 16px;
+    color: #333333;
+    /* #FFB2D9 // #333333 */
+    text-align: center;
+    margin-top: 20px; 
+    /* 마진 위에있는 속성값 변경  */
+}
+
+.test4 {
+    display: flex; 
+    /* 현재 시스템을 플렉스시스템으로 사용하겠다 */
+    /* 보더크기상관없이 자동으로 맞춰주는 시스템  */
+}
+
+.test4 > input {
+    width: 100%;
+    height: 42px;
+    border: 1px solid red;
+    /* FF00DD // #fdfdfd */
+    border-radius: 8px;
+    margin-bottom: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    /* box-shadow: 그림자 x축 방향 / 그림자 y축 방향 / 그림자 blur 효과 / 그림자 색상  */
+    text-decoration: none;
+    outline: none;
+    /* 마우스클릭 시 파란테두리없애는거 */
+    cursor: pointer;
+    /* 마우스클릭 커서 변경 */
+    font-family: 'Cute Font', cursive;
+
+}
+.test4 > input:hover {
+    background-color: blue;
+}
+
+.test4 > input::placeholder {
+    color: orange;
+}

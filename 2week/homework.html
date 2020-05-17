@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+    <style>
+        .title {
+            font-size: 36px;
+        }
+        .title > span {
+            /* title class 바로 안에 있는 span 태그 */
+            /* title span => title에 있는 모든 span 태그에 영향  */
+            font-size: 20px; 
+        }
+        .description {
+            font-size: 16px;
+        }
+        .container {
+            /* background-color: red; */
+        }
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .input-container > .input-group {
+            width: 100%;
+        }
+    </style>
+  </head>
+
+  <body>
+      <div class="container">
+        <div>
+          <h1 class="title">
+              양초를 팝니다 <span>가격: 3,000원/개</span>
+          </h1>
+          <p class="description">
+              이 양초는 사실 특별한 힘을 가지고 있어요. 불을 켜고 소원을 빌면 짜자잔 뭐든지 이뤄지게 된답니다. 하나 사가세요! 대나무 향이 아주 좋아요
+          </p>
+        </div>
+            <div class="input-container">
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">
+                      주문자 이름
+                  </span>
+                </div>
+                <input type="text" class="form-control" aria-label="Small" aria-describedby="basic-addon1">
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="inputGroupSelect01">수량</label>
+                </div>
+                <select class="custom-select" id="inputGroupSelect01">
+                  <option selected>수량을 선택해주세요</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+              </div>
+
+              <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">
+                      주소
+                  </span>
+                </div>
+                <input type="text" class="form-control" aria-label="Small" aria-describedby="basic-addon1">
+            </div>
+
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">
+                      전화번호
+                  </span>
+                </div>
+                <input type="text" class="form-control" aria-label="Small" aria-describedby="basic-addon1">
+            </div>
+            
+
+            <button class="btn btn-primary">주문하기</button>
+        </div>
+
+      </div>
+  </body>
+
+</html>

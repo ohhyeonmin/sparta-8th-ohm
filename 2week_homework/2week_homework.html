@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+        
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Stylish&family=Sunflower:wght@300;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+    <title>스파르타코딩클럽 | 숙제(오현민)</title>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>
+        function showAlert() {
+
+            let name_val = $('#order_name').val();
+            let count_val = $('#order_count').val();
+            let add_val = $('#order_address').val();
+            let phone_val = $('#order_phone').val();
+
+            if((name_val !== '') && (count_val !== '') && (add_val !== '') &&(phone_val !== '')){
+                alert('주문이 완료되었습니다');
+                rate();                
+            }
+
+            else if(name_val || count_val || add_val || phone_val == ''){
+                if(name_val == '') {
+                    alert('이름을 입력해주세요');
+                }
+                else if(count_val == ''){
+                    alert('수량을 선택해주세요');
+                }
+                else if(add_val == ''){
+                    alert('주소를 입력해주세요');
+                }
+                else if(phone_val == ''){
+                    alert('전화번호를 입력해주세요');
+                }
+            }
+        
+        function rate(){
+            $.ajax({
+                type: "GET", 
+                url: "https://api.manana.kr/exchange/rate.json",
+                data: {}, 
+                success: function(response){ 
+                    // date: "2020-05-23 14:00:06" name: "USDKRW=X" rate: 1240.58 timestamp: "1590210006"
+                    const result = response[1];
+                    const {name, rate} = result;
+
+                    let rate_text = ''; // 변수선언 
+                    // rate_text = `${name}: ${rate}`; // 형태지정 
+                    rate_text = `달러-원 환율: ${rate}`;
+                    $('#ex_text').text(rate_text); // 값 노출                      
+                }
+            })
+        }  
+        }
+
+    </script>
+
+    <style>
+        .templete {
+            margin: 20px auto;
+            width: 480px;
+            font-family: 'Black Han Sans', sans-serif;
+            font-family: 'Stylish', sans-serif;
+            font-family: 'Sunflower', sans-serif;
+        }
+        .img1 {
+            /* https://ssungkang.tistory.com/entry/css-div%EC%97%90-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EA%BD%89-%EC%B1%84%EC%9A%B0%EB%8A%94-%EB%B0%A9%EB%B2%95 참고로 추가 */
+            overflow: hidden;  
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 480px;
+            height: 250px;
+        }
+        .title {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 30px;
+        }
+        .order {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 30px;
+        }
+        .order_btn {
+            margin: 10px auto;
+            width: 80px;
+        }
+        #ex_text {
+            color: blue; 
+        }
+    </style>
+</head>
+
+<body>
+    <div class="templete"> 
+        <div class="img1">
+            <!-- <img src="./126539_98085_191.jpg" /> -->
+            <!-- 질문:  image 확대 사이즈맞추기  -->
+            <img src="https://t1.daumcdn.net/liveboard/countryhome/ef0517b12ff6416c94d9a4349c56cb28.JPG" />
+        </div>
+
+        <div class="details">
+
+                <span class="title">전원주택</span>
+                <span class="price">(가격: 10억 매매)</span> 
+
+            <div class="context">
+                까치울 전원마을 주택 중에서도 널찍한 창문을 통해 외부 채광이 바로 들어오고 창밖으로 집집마다 마당을 가꾸어 아름다운 경치를 감상하는 것은 물론 내부 자재들도 유행을 타지 않는 깔끔한 스타일의 고급자재를 사용해 어떤 가구를 들여놔도 무난하게 소화가 가능하다.
+            </div>
+            <br />
+            <h6 id="ex_text"></h6>
+
+            <div class="order">
+                주문하기 
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-default">주문자 이름</span>
+                </div>
+                <input type="text" id="order_name" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+              </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="inputGroupSelect01">수량</label>
+                </div>
+                <select class="custom-select" id="order_count"> <!-- inputGroupSelect01 -->
+                  <option selected value="">-- 수량을 선택하세요 --</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
+              </div>
+
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-default">주소</span>
+                </div>
+                <input type="text" id="order_address" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+              </div>  
+
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-default">전화번호</span>
+                </div>
+                <input type="text" id="order_phone" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+              </div>
+
+            <div class="order_btn">
+                <button type="button" class="btn btn-primary" onclick="showAlert()">주문하기</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

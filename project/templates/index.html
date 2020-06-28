@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <!-- Webpage Title -->
+  <title>Project | Apartment</title>
+
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <!-- JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+  <!-- 구글폰트 -->
+  <link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet">
+
+  <script>
+
+    $(document).ready(function () {
+      $('#aptinfo-box').html('');
+      listing();
+    });  
+    
+    function region_search() {
+      let seoul_gu = $('#input_gu').val();
+      let seoul_dong = $('#input_dong').val();
+
+      if (seoul_gu.length === 0 || seoul_dong.length === 0) {
+              alert('지역을 입력해주세요!');
+              return;
+      }
+
+      $.ajax({
+                type: 'POST', 
+                url: '/region',
+                data: {
+                  seoul_gu_give: seoul_gu,
+                  seoul_dong_give: seoul_dong
+                }, 
+                success: function (response) {
+                    if (response['result'] == 'success') {
+                        alert(response['msg']);
+                        window.location.reload();
+                    }
+                }
+            });
+    }
+
+    function listing() {
+            $.ajax({
+                type: "GET",
+                url: "/region",
+                data: {},
+                success: function (response) {
+                    if (response['result'] == 'success') {
+                        // let reviews = response['reviews']
+                        let aptcontext = response['aptcontext']
+                        apt_input();
+                        aptcontext.forEach(function(apt){
+                        // reviews.forEach(function(review) {
+                          let html = `
+                            <tr>
+                              <td>${apt['item_db']}</td>
+                              <td>${apt['price_db']}</td>
+                              <td>${apt['info_db']}</td>
+                            </tr>
+                          `;
+
+                          $('#aptinfo-box').append(html);
+                        })
+                    } else {
+                        alert('정보를 받아오지 못했습니다');
+                    }
+                }
+            });
+        }
+
+        function apt_input() {
+          let temp_html = `<div class="apt_name">
+                                <button type="button" class="btn btn-success" id="apt_name">${apt_title_db}</button>
+                           </div>`;
+          $('#aptinfo-box').append(temp_html);
+      }
+  </script>
+
+  <!-- style -->
+  <style type="text/css">
+    * { font-family: 'Poor Story', cursive; }
+    .wrap {
+      width: 900px;
+      margin: auto;
+      text-align: center;
+    }
+    .wrap_region {
+      width: 300px;
+      margin: auto;
+      text-align: left;
+    }
+    .table {
+        width: 900px;
+        margin: auto;
+        text-align: center;
+        margin-top: 20px;
+    }
+    .apt_name {
+        width: 900px;
+        margin: auto;
+        text-align: left;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="jumbotron">
+      <h1 class="display-4">아파트 매매 정보 </h1> <!-- ✿ ˶◕‿◕˶✿  -->
+      <p class="lead">지역을 선택해주세요! 하단에 매매정보가 나옵니다</p>
+      <hr class="my-4"> <!-- &nbsp; -->
+      <h4 class="text1">지역선택</h4>
+
+        <div class="wrap_region">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">서울시</span>
+            </div>
+          </div>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">시/군/구</span>
+            </div>
+            <input type="text" id="input_gu" class="form-control" placeholder="입력하세요(ex.강남구)" aria-label="Username" aria-describedby="basic-addon1">
+          </div>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">읍/면/동</span>
+            </div>
+            <input type="text" id="input_dong" class="form-control" placeholder="입력하세요(ex.개포동)" aria-label="Username" aria-describedby="basic-addon1">
+          </div>
+        </div>
+        <button type="button" class="btn btn-info" onclick="region_search()">확인</button>
+    </div>
+  </div>
+
+  <div class="apt_name">
+  <button type="button" class="btn btn-success" id="apt_name">아파트이름</button>
+  </div>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">단지이름</th>
+        <th scope="col">가격</th>
+        <th scope="col">정보</th>
+
+      </tr>
+    </thead>
+    <tbody id="aptinfo-box">
+      <tr>
+        <td>Otto</td>
+        <td>@mdo</td>
+        <td>@mdo</td>
+ 
+      </tr>
+    </tbody>
+  </table>
+</body>
+
+</html>
